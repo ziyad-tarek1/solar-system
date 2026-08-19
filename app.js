@@ -39,14 +39,18 @@ var dataSchema = new Schema({
 var planetModel = mongoose.model('planets', dataSchema);
 
 
-
+// Get planet details
+// http method: POST
+// http path: /planet
+// http body: { id: number }
+// http response: planet data
 app.post('/planet',   function(req, res) {
    // console.log("Received Planet ID " + req.body.id)
     planetModel.findOne({
         id: req.body.id
     }, function(err, planetData) {
         if (err) {
-            alert("Ooops, We only have 9 planets and a sun. Select a number from 0 - 9")
+            alert("Ooops, We only have 8 planets and a sun. Select a number from 0 - 8")
             res.send("Error in Planet Data")
         } else {
             res.send(planetData);
@@ -54,11 +58,20 @@ app.post('/planet',   function(req, res) {
     })
 })
 
+// Home page
+// http method: GET
+// http path: /
+// http body: none
+// http response: index.html
 app.get('/',   async (req, res) => {
     res.sendFile(path.join(__dirname, '/', 'index.html'));
 });
 
-
+// Get OS details
+// http method: GET
+// http path: /os
+// http body: none
+// http response: OS details
 app.get('/os',   function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send({
@@ -68,6 +81,10 @@ app.get('/os',   function(req, res) {
 })
 
 // liveness probe
+// http method: GET
+// http path: /live
+// http body: none
+// http response: live status
 app.get('/live',   function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send({
@@ -76,6 +93,10 @@ app.get('/live',   function(req, res) {
 })
 
 // readiness probe
+// http method: GET
+// http path: /ready
+// http body: none
+// http response: ready status
 app.get('/ready',   function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send({
@@ -83,6 +104,12 @@ app.get('/ready',   function(req, res) {
     });
 })
 
+// Start the server
+// http method: GET
+// http path: /
+// http body: none
+// http response: server started
+// application port is 3000
 app.listen(3000, () => {
     console.log("Server successfully running on port - " +3000);
 })

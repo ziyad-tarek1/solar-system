@@ -23,16 +23,16 @@ services:
       retries: 5
       start_period: 40s
 
-  mongo-express:
-    image: mongo-express:1.0.2-20
-    restart: always
-    ports:
-      - 30081:8081
-    depends_on:
-      mongo:
-        condition: service_healthy
-    environment:
-      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/
-      ME_CONFIG_BASICAUTH_ENABLED: "true"
-      ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
-      ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+  # mongo-express:
+  #   image: mongo-express:1.0.2-20
+  #   restart: always
+  #   ports:
+  #     - 30081:8081
+  #   depends_on:
+  #     mongo:
+  #       condition: service_healthy
+  #   environment:
+  #     ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/
+  #     ME_CONFIG_BASICAUTH_ENABLED: "true"
+  #     ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+  #     ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass

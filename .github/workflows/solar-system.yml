@@ -40,7 +40,7 @@ jobs:
   # ---------------------------------------------------------------------------
   tests:
     name: Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # This is the runner environment UBUNTU VM (MONGODB , MYSQL , POSTGRES , etc)
 
     # Sidecar MongoDB for this job only (NOT the cluster MongoDB).
     services:
@@ -59,10 +59,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7 # v7 is the latest version of the checkout action
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7 # v7 is the latest version
         with:
           node-version: 20
           cache: npm
@@ -95,7 +95,7 @@ jobs:
             await mongoose.disconnect();
           }).catch((err) => { console.error(err); process.exit(1); });
           EOF
-
+# ------------------------------------------------
       - name: Unit Testing
         run: npm test
         env:
@@ -124,7 +124,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
